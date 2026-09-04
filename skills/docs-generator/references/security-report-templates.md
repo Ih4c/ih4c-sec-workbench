@@ -1,252 +1,252 @@
-# 安全/逆向/渗透技术文档模板
+# Security / Reverse / Pentest Technical Document Templates
 
-本文件提供逆向工程、渗透测试、漏洞分析等安全类项目的文档模板。任务完成后，AI 应在用户项目目录下新建文档并按对应模板输出。
+This file provides document templates for security projects such as reverse engineering, penetration testing, and vulnerability analysis. After a task completes, the AI should create a document in the user's project directory and output according to the corresponding template.
 
 ---
 
-## 0. Evidence Chain（所有安全报告 MUST 包含）
+## 0. Evidence Chain (all security reports MUST include)
 
-> 契约全文：`skills/ops/evidence-finding-path.md`  
-> Case 目录：`work/<case>/`（`case-init.ps1`）
+> Full contract: `skills/ops/evidence-finding-path.md`  
+> Case directory: `work/<case>/` (`case-init.ps1`)
 
-报告正文中 **MUST** 含以下章节（可并入「核心发现」但字段不得省略）：
+The report body **MUST** include the following sections (they may be merged into "Core Findings", but the fields MUST NOT be omitted):
 
-### 0.1 Scope 摘要
-- 链到 `scope.md`：`auth` / `in_scope` / `network_profile`
-- 无 scope → 不得宣称任务完成
+### 0.1 Scope summary
+- Link to `scope.md`: `auth` / `in_scope` / `network_profile`
+- No scope → task completion MUST NOT be claimed
 
 ### 0.2 Evidence
-至少 1 条，字段：`E-id` / `source_ref` / `repro_command` / `content_hash|n/a`
+At least 1 entry, fields: `E-id` / `source_ref` / `repro_command` / `content_hash|n/a`
 
 ### 0.3 Findings
-每条：`F-id` / `severity|n/a_re` / `evidence_ids` / `confidence` / `location` / `status`
+Each: `F-id` / `severity|n/a_re` / `evidence_ids` / `confidence` / `location` / `status`
 
 ### 0.4 Path
-至少 1 条 `P-id`：`path_type=attack|callflow|solve`，步骤可挂 E/F
+At least 1 `P-id`: `path_type=attack|callflow|solve`; steps may attach E/F
 
-### 0.5 Timeline 摘要
-链到 `timeline.md` 或嵌入关键 3–10 条追加记录
-
----
+### 0.5 Timeline summary
+Link to `timeline.md` or embed the key 3-10 appended records
 
 ---
 
-## 0.6 Vendor structure overlay（专业厂商报告结构）
+---
 
-> 全文规则：`references/vendor-report-rules.md`（Issue #65）  
-> **MUST** 在生成安全类正式报告时读取并选型；**只抽结构，禁止抄录厂商原文/IOC 实例**。
+## 0.6 Vendor structure overlay (professional vendor report structure)
 
-| Flavor / Overlay | 场景 | 骨架一句话 |
+> Full rules: `references/vendor-report-rules.md` (Issue #65)  
+> **MUST** be read and a flavor selected when generating formal security reports; **extract only the structure; copying vendor originals/IOC instances is forbidden**.
+
+| Flavor / Overlay | Scenario | One-line skeleton |
 |------------------|------|------------|
-| `malware` | 明确恶意样本/普通木马/白加黑 | 火绒式：概述→流程→样本分析→应急处置→IOC |
-| `apt` | APT/战役/多阶段链 | 卡巴式：摘要→感染链→调查→Interesting findings→技术分析→检测缓解→IOC |
-| `flavor = null` | 普通逆向/渗透/CTF/JS 签名 | 本节任务模板 + 适用的 Base 通用元素 |
-| thin `vuln` | 漏洞/补丁/CVE 技术分析（显式） | 概述→影响/复现→崩溃与补丁分析→防护建议 |
+| `malware` | clear malicious sample / common trojan / white-and-black (白加黑) loading | Huorong-style: overview → flow → sample analysis → incident response → IOC |
+| `apt` | APT / campaign / multi-stage chain | Kaspersky-style: summary → infection chain → investigation → Interesting findings → technical analysis → detection & mitigation → IOC |
+| `flavor = null` | general reverse / pentest / CTF / JS signing | this section's task template + applicable Base common elements |
+| thin `vuln` | vulnerability / patch / CVE technical analysis (explicit) | overview → impact/reproduction → crash and patch analysis → protection recommendations |
 
-**通用元素（G1–G7）摘要**：G1 执行摘要 MUST · G2 Scope MUST · G3 E/F/P MUST · G4 IOC 仅 `malware`/`apt` MUST · G5 建议在 `malware`/`apt`/`vuln` MUST · G6 附录 SHOULD · G7 ATT&CK 在 `apt` MUST
+**Common elements (G1-G7) summary**: G1 Executive summary MUST · G2 Scope MUST · G3 E/F/P MUST · G4 IOC MUST only for `malware`/`apt` · G5 Recommendations MUST for `malware`/`apt`/`vuln` · G6 Appendix SHOULD · G7 ATT&CK MUST for `apt`
 
-选型与章节顺序以 `vendor-report-rules.md` 为准；与 §0.1–0.5 冲突时 **Evidence 契约优先**。
+Flavor selection and section order follow `vendor-report-rules.md`; when it conflicts with §0.1-0.5, **the Evidence contract wins**.
 
-## 1. 逆向工程报告模板
+## 1. Reverse Engineering Report Template
 
 ```markdown
-# [目标名称] 逆向分析报告
+# [Target name] Reverse Analysis Report
 
-> 分析日期：YYYY-MM-DD
-> 分析人员：[AI / 人工]
-> 工具链：[jadx / IDA / radare2 / Frida / ...]
+> Analysis date: YYYY-MM-DD
+> Analyst: [AI / Human]
+> Toolchain: [jadx / IDA / radare2 / Frida / ...]
 
-## 1. 目标概述
+## 1. Target overview
 
-| 属性 | 值 |
+| Property | Value |
 |------|---|
-| 文件名 | |
-| 文件类型 | APK / ELF / PE / Mach-O / ... |
-| 大小 | |
+| File name | |
+| File type | APK / ELF / PE / Mach-O / ... |
+| Size | |
 | MD5 | |
 | SHA256 | |
-| 包名/入口 | |
+| Package / entry | |
 
-## 2. 分析目标
+## 2. Analysis objectives
 
-<!-- 本次逆向要回答的核心问题 -->
+<!-- Core questions this reverse pass must answer -->
 
-## 3. 静态分析
+## 3. Static analysis
 
-### 3.1 基本信息
-<!-- 架构、编译器、保护机制、字符串特征 -->
+### 3.1 Basic information
+<!-- Architecture, compiler, protection mechanisms, string characteristics -->
 
-### 3.1.1 导入表 / 依赖（二进制 MUST）
-<!-- 写入 E-imports / E-triage-imports 摘要；失败也要记 Evidence，禁止跳过 -->
+### 3.1.1 Import table / dependencies (binary MUST)
+<!-- Write the E-imports / E-triage-imports summary; record Evidence even on failure; skipping is forbidden -->
 
-### 3.2 关键函数/类
-<!-- 列出定位到的关键逻辑，附代码片段 -->
+### 3.2 Key functions/classes
+<!-- List the located key logic, with code snippets -->
 
-### 3.3 加密/签名算法
-<!-- 如果涉及加密，说明算法、密钥来源、参数构造 -->
+### 3.3 Crypto/signing algorithm
+<!-- If crypto is involved, explain the algorithm, key source, and parameter construction -->
 
-## 4. 动态分析
+## 4. Dynamic analysis
 
-### 4.1 Hook 记录
-<!-- Frida / xposed / 其他 hook 的目标和结果 -->
+### 4.1 Hook records
+<!-- Frida / xposed / other hook targets and results -->
 
-### 4.2 运行时行为
-<!-- 网络请求、文件操作、进程行为 -->
+### 4.2 Runtime behavior
+<!-- Network requests, file operations, process behavior -->
 
-## 5. 核心发现
+## 5. Core findings
 
-<!-- 用编号列出关键结论 -->
+<!-- Numbered key conclusions -->
 
 1. ...
 2. ...
 3. ...
 
-## 6. 复现步骤
+## 6. Reproduction steps
 
-<!-- 让其他人能重现你的分析结果 -->
+<!-- Let others reproduce your analysis results -->
 
 ```bash
 # 关键命令
 ```
 
-## 7. 遗留问题
+## 7. Open questions
 
-<!-- 没有完全解决的点 -->
+<!-- Points not fully resolved -->
 
-## 8. 附件
+## 8. Attachments
 
-<!-- hook 脚本、解密代码、截图等 -->
+<!-- Hook scripts, decryption code, screenshots, etc. -->
 ```
 
 ---
 
 ---
 
-## 1b. 恶意软件 / APT 报告（厂商 flavor）
+## 1b. Malware / APT Reports (vendor flavor)
 
-当任务为恶意软件分析、病毒报告、APT/战役分析时，**不要**仅用上面「逆向工程」骨架交差；普通逆向任务保持原模板，不自动选择 vendor flavor：
+When the task is malware analysis, virus report, or APT/campaign analysis, do **not** deliver using only the "Reverse Engineering" skeleton above; ordinary reverse tasks keep the original template and do not auto-select a vendor flavor:
 
-1. 读 `vendor-report-rules.md` 选 `malware` 或 `apt`
-2. 按对应章节顺序输出
-3. 仍 **MUST** 含 §0 Evidence 链；`malware` / `apt` flavor 另 **MUST** 含 IOC 表
-4. 二进制样本的静态分析 **MUST** 含导入表 Evidence（与 radare2/ida/malware 硬门一致）
+1. Read `vendor-report-rules.md` and select `malware` or `apt`
+2. Output following the corresponding section order
+3. Still **MUST** include the §0 Evidence chain; `malware` / `apt` flavors additionally **MUST** include an IOC table
+4. Static analysis of binary samples **MUST** include import-table Evidence (consistent with the radare2/ida/malware hard gate)
 
-## 1c. 漏洞技术分析报告（thin `vuln` overlay）
+## 1c. Vulnerability Technical Analysis Report (thin `vuln` overlay)
 
-当任务为 **OS/组件漏洞、补丁对比、CVE 技术分析**，或用户明确要求「漏洞技术分析报告」时：
+When the task is **OS/component vulnerability, patch diff, CVE technical analysis**, or the user explicitly requests a "vulnerability technical analysis report":
 
-1. 读 `vendor-report-rules.md` §3b，使用 thin `vuln` 章节顺序（**不是** malware/apt 全文 flavor）
-2. **MUST** 含：影响范围、授权内复现或明确 n/a、崩溃/根因或补丁差异 Evidence、防护/补丁建议
-3. **MUST** 含 §0 Evidence→Finding→Path
-4. **MUST NOT** 在未授权目标上扩展 PoC，或抄录外部利用武器化细节
+1. Read §3b of `vendor-report-rules.md` and use the thin `vuln` section order (**not** the full malware/apt flavor)
+2. **MUST** include: impact scope, reproduction within authorization or explicit n/a, crash/root-cause or patch-diff Evidence, protection/patch recommendations
+3. **MUST** include the §0 Evidence→Finding→Path chain
+4. **MUST NOT** extend PoC onto unauthorized targets, or copy externally weaponized exploitation details
 
-## 2. 渗透测试报告模板
+## 2. Penetration Test Report Template
 
 ```markdown
-# [目标] 渗透测试报告
+# [Target] Penetration Test Report
 
-> 测试日期：YYYY-MM-DD
-> 测试范围：[URL / IP / 应用名]
-> 授权状态：[已授权 / CTF / 学习环境]
+> Test date: YYYY-MM-DD
+> Test scope: [URL / IP / app name]
+> Authorization status: [Authorized / CTF / Lab environment]
 
-## 1. 执行摘要
+## 1. Executive summary
 
-<!-- 一段话总结：测试了什么、发现了什么、风险等级 -->
+<!-- One paragraph: what was tested, what was found, risk level -->
 
-## 2. 测试范围
+## 2. Test scope
 
-| 项目 | 详情 |
+| Item | Details |
 |------|------|
-| 目标 | |
-| 测试类型 | 黑盒 / 灰盒 / 白盒 |
-| 测试时间 | |
-| 工具 | |
+| Target | |
+| Test type | Black-box / Gray-box / White-box |
+| Test time | |
+| Tools | |
 
-## 3. 发现汇总
+## 3. Findings summary
 
-| # | 漏洞名称 | 风险等级 | 状态 |
+| # | Vulnerability | Severity | Status |
 |---|---------|---------|------|
-| 1 | | 高/中/低/信息 | 已验证/待确认 |
+| 1 | | High/Med/Low/Info | Verified/Pending |
 
-## 4. 漏洞详情
+## 4. Vulnerability details
 
-### 4.1 [漏洞名称]
+### 4.1 [Vulnerability name]
 
-**风险等级**：高 / 中 / 低
+**Severity**: High / Medium / Low
 
-**描述**：
+**Description**:
 
-**影响**：
+**Impact**:
 
-**复现步骤**：
+**Reproduction steps**:
 
 1. ...
 2. ...
 3. ...
 
-**证据**：
+**Evidence**:
 
 ```
 <!-- 请求/响应/截图/payload -->
 ```
 
-**修复建议**：
+**Remediation**:
 
-## 5. 攻击路径
+## 5. Attack path
 
-<!-- 如果有完整攻击链，画出路径 -->
+<!-- If there is a full attack chain, draw the path -->
 
 ```
-入口 → 信息收集 → 漏洞利用 → 权限提升 → 目标达成
+Entry → Recon → Exploit → Privilege escalation → Goal achieved
 ```
 
-## 6. 工具与环境
+## 6. Tools and environment
 
-| 工具 | 版本 | 用途 |
+| Tool | Version | Purpose |
 |------|------|------|
 | | | |
 
-## 7. 修复建议总结
+## 7. Remediation summary
 
-| 优先级 | 建议 |
+| Priority | Recommendation |
 |--------|------|
 | P0 | |
 | P1 | |
 | P2 | |
 
-## 8. 附录
+## 8. Appendix
 
-<!-- 完整 payload、脚本、配置文件等 -->
+<!-- Full payloads, scripts, configuration files, etc. -->
 ```
 
 ---
 
-## 3. CTF Writeup 模板
+## 3. CTF Writeup Template
 
 ```markdown
-# [比赛名] - [题目名] Writeup
+# [Competition name] - [Challenge name] Writeup
 
-> 分类：Web / Reverse / Pwn / Crypto / Misc / Forensics
-> 难度：Easy / Medium / Hard
-> 分值：N pts
-> 解题时间：
+> Category: Web / Reverse / Pwn / Crypto / Misc / Forensics
+> Difficulty: Easy / Medium / Hard
+> Points: N pts
+> Time to solve:
 
-## 题目描述
+## Challenge description
 
-<!-- 原题描述 -->
+<!-- Original challenge description -->
 
-## 解题思路
+## Solution approach
 
-### 第一步：信息收集
-<!-- 观察到了什么 -->
+### Step one: Information gathering
+<!-- What was observed -->
 
-### 第二步：漏洞/突破口
-<!-- 找到了什么关键点 -->
+### Step two: Vulnerability/break-in point
+<!-- What key point was found -->
 
-### 第三步：利用
-<!-- 怎么利用的 -->
+### Step three: Exploitation
+<!-- How it was exploited -->
 
-## 关键代码/Payload
+## Key code/Payload
 
 ```python
 # exploit code
@@ -258,27 +258,27 @@
 flag{...}
 ```
 
-## 踩坑记录
+## Pitfalls
 
-<!-- 走过的弯路 -->
+<!-- Detours taken along the way -->
 
-## 知识点
+## Knowledge points
 
-<!-- 这道题涉及的知识点，方便后续复习 -->
+<!-- Knowledge involved in this challenge, for later review -->
 ```
 
 ---
 
-## 4. JS/Web 签名逆向报告模板
+## 4. JS/Web Signature Reverse Report Template
 
 ```markdown
-# [站点/应用] 签名参数逆向报告
+# [Site/App] Signature Parameter Reverse Report
 
-> 分析日期：YYYY-MM-DD
-> 目标接口：[URL]
-> 签名字段：[字段名]
+> Analysis date: YYYY-MM-DD
+> Target endpoint: [URL]
+> Signature field: [field name]
 
-## 1. 目标请求
+## 1. Target request
 
 ```http
 POST /api/xxx HTTP/1.1
@@ -287,62 +287,62 @@ Host: example.com
 param1=xxx&sign=<目标字段>
 ```
 
-## 2. 定位过程
+## 2. Location process
 
-### 2.1 断点/Hook 方式
-<!-- 怎么找到签名生成位置的 -->
+### 2.1 Breakpoint/Hook approach
+<!-- How the signature generation site was located -->
 
-### 2.2 调用栈
-<!-- 关键调用链 -->
+### 2.2 Call stack
+<!-- Key call chain -->
 
-## 3. 算法还原
+## 3. Algorithm reconstruction
 
-### 3.1 算法类型
-<!-- HMAC-SHA256 / AES / 自定义 / ... -->
+### 3.1 Algorithm type
+<!-- HMAC-SHA256 / AES / custom / ... -->
 
-### 3.2 参数构造
-<!-- 哪些字段参与签名、排序规则、分隔符 -->
+### 3.2 Parameter construction
+<!-- Which fields participate in the signing, sorting rules, separators -->
 
-### 3.3 密钥来源
-<!-- 硬编码 / 接口返回 / 时间戳派生 / ... -->
+### 3.3 Key source
+<!-- Hardcoded / returned by API / timestamp-derived / ... -->
 
-## 4. 本地复现代码
+## 4. Local reproduction code
 
 ```javascript
 // Node.js 复现
 ```
 
-## 5. 验证结果
+## 5. Verification results
 
-<!-- 用复现代码生成的签名与实际请求对比 -->
+<!-- Compare signatures generated by the reproduction code against the real request -->
 
-## 6. 反爬/风控注意事项
+## 6. Anti-scraping/risk-control considerations
 
-<!-- 频率限制、设备指纹、环境检测等 -->
+<!-- Rate limits, device fingerprinting, environment detection, etc. -->
 ```
 
 ---
 
-## 5. 文档输出规范
+## 5. Document Output Guidelines
 
-### 输出位置
+### Output location
 
-- 文档默认输出到**用户当前项目目录**（不是 skill 包目录）
-- 文件名格式：`YYYY-MM-DD_[类型]-[目标简称]-report.md`
-- 如果用户项目有 `docs/` 目录，优先放在 `docs/` 下
+- Documents default to the **user's current project directory** (not the skill package directory)
+- File name format: `YYYY-MM-DD_[type]-[target-short-name]-report.md`
+- If the user's project has a `docs/` directory, prefer placing documents under `docs/`
 
-### 输出时机
+### Output timing
 
-AI 在以下时机自动调用本 skill 生成文档：
+The AI automatically invokes this skill to generate documents at the following points:
 
-1. 逆向任务完成，已产出核心结论
-2. 渗透测试完成，已发现并验证漏洞
-3. CTF 题目解出，已拿到 flag
-4. 用户明确要求"写一份报告/文档"
+1. Reverse task complete, core conclusions produced
+2. Penetration test complete, vulnerabilities found and verified
+3. CTF challenge solved, flag obtained
+4. User explicitly asks to "write a report/document"
 
-### 质量要求
+### Quality requirements
 
-- 所有代码块必须可直接运行或有明确上下文
-- 不要有 placeholder/TODO（如果某部分确实未完成，标注"待补充"并说明原因）
-- 关键发现必须有证据支撑（命令输出、截图描述、代码片段）
-- 复现步骤必须让第三方能独立重现
+- Every code block must be directly runnable or have explicit context
+- No placeholders/TODOs (if a part is genuinely unfinished, mark it "to be completed (待补充)" and state the reason)
+- Key findings must be backed by evidence (command output, screenshot descriptions, code snippets)
+- Reproduction steps must allow a third party to reproduce independently

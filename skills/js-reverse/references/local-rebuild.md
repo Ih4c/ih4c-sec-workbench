@@ -1,11 +1,11 @@
-# 本地复现
+# Local Reproduction
 
-页面侧确认以下内容后再回到 Node：
+Return to Node only after the page side confirms the following:
 
-- 真实入口函数
-- 调用顺序
-- 参数来源
-- 依赖的浏览器对象
-- 是否依赖时间、随机数、storage、cookie、UA、canvas、crypto
+- The real entry function
+- The call order
+- The parameter sources
+- The browser objects it depends on
+- Whether it depends on time, randomness, storage, cookies, UA, canvas, or crypto
 
-先最小复现，再逐步补环境，不要一次性模拟整浏览器。
+Reproduce the minimum first, then patch the environment step by step — do not simulate the whole browser at once.

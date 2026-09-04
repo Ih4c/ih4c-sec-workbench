@@ -5,51 +5,51 @@ description: Use for authorized email security review including phishing analysi
 
 # Email Security & Phishing Analysis
 
-## ACTION REQUIRED（读完后立刻执行）
+## ACTION REQUIRED (Execute Immediately After Reading)
 
-1. `NOW`: 确认授权（分析样本邮件 / 租户配置评审）
-2. `NOW`: 不向真实用户二次投递恶意样本
-3. `ACT`: 头认证 → 内容/URL → 附件沙箱 → 租户控制面建议
+1. `NOW`: Confirm authorization (analyzing sample emails / tenant configuration review — per `../field-journal/precedent-pentest.md` and `../field-journal/precedent-auth.md`; scope.md is case tracking + network profile)
+2. `NOW`: Do not re-deliver malicious samples to real users
+3. `ACT`: Header authentication → content/URL → attachment sandbox → tenant control-plane recommendations
 
-## 适用场景
+## Applicable Scenarios
 
-- 钓鱼邮件拆解与 IOC
-- SPF/DKIM/DMARC 配置评估
-- BEC 商务邮件欺诈模式
-- OAuth 应用钓鱼 / 邮箱令牌滥用（联合 llm/cloud 身份）
-- 安全意识演练设计（授权）
+- Phishing email dissection and IOC extraction
+- SPF/DKIM/DMARC configuration assessment
+- BEC (Business Email Compromise) patterns
+- OAuth app phishing / mailbox token abuse (combining llm/cloud identity)
+- Security awareness exercise design (authorized)
 
-## 工作流
+## Workflow
 
 ```text
-□ 完整原始头：Received 链、From/Return-Path 一致性
-□ SPF/DKIM/DMARC 对齐结果
-□ URL 沙箱与附件静态（联合 malware-analysis）
-□ 仿冒品牌与回复地址差异
-□ 租户：反钓鱼策略、外部标记、MFA、OAuth app 同意
+□ Full raw headers: Received chain, From/Return-Path consistency
+□ SPF/DKIM/DMARC alignment results
+□ URL sandbox and attachment static analysis (combine malware-analysis)
+□ Impersonated brand and reply-to address discrepancies
+□ Tenant: anti-phishing policies, external tagging, MFA, OAuth app consent
 ```
 
-## 工具链
+## Toolchain
 
-| 工具 | 用途 |
+| Tool | Purpose |
 |------|------|
-| 邮件客户端「查看源」 | 头 |
-| dig/nslookup | SPF/DMARC 记录 |
-| urlscan / 沙箱 | 链接与附件 |
-| 租户管理中心 | 策略 |
+| Email client "view source" | Headers |
+| dig/nslookup | SPF/DMARC records |
+| urlscan / sandbox | Links and attachments |
+| Tenant admin center | Policies |
 
-## 参考
+## References
 
 - `references/email-auth-checklist.md`
-- `../malware-analysis/` `../attack-chain/`（钓鱼阶段） `../windows-ad/`（令牌）
+- `../malware-analysis/` `../attack-chain/` (phishing stage) `../windows-ad/` (tokens)
 
-## 路由上下文
+## Routing Context
 
-**上游**: MASTER R36  
-**MUST NOT**: 未授权对第三方域群发测试钓鱼
+**Upstream**: MASTER R36  
+**MUST NOT**: mass-test phishing against third-party domains without authorization
 
-## 任务完成自检
+## Task Completion Self-Check
 
-- [ ] 头认证结论是否完整？
-- [ ] IOC 是否可检测化（联合 threat-hunting）？
-- [ ] Checklist？
+- [ ] Is the header-authentication conclusion complete?
+- [ ] Are the IOCs detection-ready (combine threat-hunting)?
+- [ ] Checklist?

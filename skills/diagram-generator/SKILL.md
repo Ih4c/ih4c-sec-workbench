@@ -5,12 +5,12 @@ description: generate, refine, validate, and render diagrams from natural langua
 
 # Diagram Generator
 
-## ACTION REQUIRED（读完后立刻执行）
+## ACTION REQUIRED (Execute Immediately After Reading)
 
-1. `NOW`：确认当前任务是否命中本 skill 的适用范围
-2. `NOW`：读取 `../tool-index.md`，校验工具可用性和实际路径
-3. `NEXT`：缺工具时调用 bootstrap，不要猜路径
-4. `ACT`：进入"工作流"第一步并执行，不要停在确认状态
+1. `NOW`: Confirm whether the current task hits this skill's scope
+2. `NOW`: Read `../tool-index.md` to verify tool availability and actual paths
+3. `NEXT`: When a tool is missing, call bootstrap — never guess paths
+4. `ACT`: Enter the first step of the "Workflow" and execute; do not stop at confirmation state
 
 ## Purpose
 
@@ -114,7 +114,7 @@ python "<SKILL_ROOT>/diagram-generator/scripts/render_diagram.py" input.dot --fo
 python "<SKILL_ROOT>/diagram-generator/scripts/render_diagram.py" input.puml --format svg --out output.svg
 ```
 
-> `<SKILL_ROOT>` 是本包 `skills/` 目录的实际路径，AI 应自动检测。
+> `<SKILL_ROOT>` is the actual path of this package's `skills/` directory; the AI should detect it automatically.
 
 The renderer is intentionally dependency-tolerant. It tries common local tools and reports actionable installation hints if a renderer is unavailable. Do not claim an image was rendered unless the script completed successfully and the output file exists.
 
@@ -134,7 +134,7 @@ Before finalizing:
 Use this structure for most diagram answers:
 
 ```markdown
-下面是可编辑的 [language] 版本：
+Here is the editable [language] version:
 
 ```[language]
 [source]
@@ -150,39 +150,39 @@ For English user requests, respond in English. For Chinese user requests, respon
 
 ---
 
-## 按需自举（On-Demand Bootstrap）
+## On-Demand Bootstrap
 
-### 自动化能力边界
+### Automation capability boundary
 
-| 工具 | 可自动安装 | 安装方式 | 说明 |
+| Tool | Auto-installable | Install method | Notes |
 |------|-----------|---------|------|
-| Mermaid CLI (mmdc) | ✓ | npm install -g @mermaid-js/mermaid-cli | 渲染 Mermaid 为 PNG/SVG |
-| Graphviz (dot) | ✗ | 手动安装 | https://graphviz.org/download/ |
-| PlantUML | ✗ | 需要 Java + plantuml.jar | https://plantuml.com/download |
-| Python (render script) | ✓ | 已在 bootstrap 中 | `scripts/render_diagram.py` 依赖 |
+| Mermaid CLI (mmdc) | ✓ | npm install -g @mermaid-js/mermaid-cli | Renders Mermaid to PNG/SVG |
+| Graphviz (dot) | ✗ | Manual install | https://graphviz.org/download/ |
+| PlantUML | ✗ | Requires Java + plantuml.jar | https://plantuml.com/download |
+| Python (render script) | ✓ | Already in bootstrap | `scripts/render_diagram.py` dependency |
 
-### 说明
+### Notes
 
-本 skill 主要输出文本格式的图表源码（Mermaid/DOT/PlantUML），不一定需要本地渲染工具。只有当用户明确要求生成 PNG/SVG/PDF 文件时才需要对应的渲染器。
+This skill primarily outputs text-based diagram source (Mermaid/DOT/PlantUML) and does not necessarily need a local rendering tool. A renderer is only needed when the user explicitly asks to generate PNG/SVG/PDF files.
 
-如果渲染器不可用，`scripts/render_diagram.py` 会输出安装提示而不是报错。
+If a renderer is unavailable, `scripts/render_diagram.py` prints an installation hint instead of erroring out.
 
 ---
 
-## 路由上下文
+## Routing Context
 
-**上游入口**: `skills/SKILL.md`（总控）、`routing.md`
-**触发条件**: 用户说"画图"、"流程图"、"架构图"、"攻击路径图"、"时序图"、"Mermaid"、"Graphviz"、"PlantUML"
-**下游出口**:
-- 生成的图表可嵌入 `docs-generator/` 的报告中
-- 攻击路径图可配合 `pentest-tools/` 的渗透报告
+**Upstream entry**: `skills/SKILL.md` (master), `routing.md`
+**Trigger conditions**: user says "画图", "流程图", "架构图", "攻击路径图", "时序图", "Mermaid", "Graphviz", "PlantUML"
+**Downstream exit**:
+- Generated diagrams can be embedded in `docs-generator/` reports
+- Attack path diagrams can accompany `pentest-tools/` pentest reports
 
-**同级关联模块**: `docs-generator/`（报告中嵌入图表）
+**Peer modules**: `docs-generator/` (embedding diagrams in reports)
 
 
-## 任务完成自检（声称完成前 MUST 通过）
+## Task Completion Self-Check (MUST pass before claiming completion)
 
-- [ ] 我是否执行了工作流中的每一步（而不是只阅读）？
-- [ ] 我是否基于 `tool-index` 使用了真实工具路径？
-- [ ] 我是否产出了可复现证据（命令/脚本/截图/报告）？
-- [ ] 我是否完成并回写了 RULES 要求的 Checklist 项？
+- [ ] Did I execute every step of the workflow (rather than only reading it)?
+- [ ] Did I use real tool paths based on `tool-index`?
+- [ ] Did I produce reproducible evidence (commands/scripts/screenshots/reports)?
+- [ ] Did I complete and write back the Checklist items required by RULES?
