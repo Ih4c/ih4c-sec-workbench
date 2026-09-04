@@ -19,6 +19,9 @@ Desktop.ini
 *.swo
 *~
 
+# Obsidian vault config
+.obsidian/
+
 # Temp files
 *.tmp
 *.bak

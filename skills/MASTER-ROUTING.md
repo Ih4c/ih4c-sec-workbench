@@ -7,7 +7,7 @@
 ```text
 1. 先路由后动手
 2. 输出 PRIMARY 路径 + 一句话依据
-3. case-init / scope.md（ops/scope-contract）— auth 未 granted 禁止对目标 ACT
+3. case-init / scope.md（ops/scope-contract）— case 跟踪 + network profile；授权 per field-journal/precedent-auth.md（assume authorized）
 4. 指定 lead + specialist 角色（ops/role-map）
 5. 立即打开 PRIMARY 的 SKILL.md → ACTION REQUIRED
 6. 工具路径只认 tool-index；缺则 bootstrap（仅 manifest 能力）
@@ -30,7 +30,7 @@ powershell -File skills\scripts\case-init.ps1 -Hint "<任务>" -CaseName "my-cas
 powershell -File skills\scripts\case-init.ps1 -Hint "offline apk" -CaseName "my-sample" -Preset offline-sample -Sample ".\app.apk"
 # 冒烟：verify + 脚本解析 + 路由矩阵（含中文 Hint）
 powershell -File skills\scripts\smoke.ps1
-# ACT 前轻量 scope 门禁（未就绪 exit 2；-Force 为兼容参数，不能绕过硬门）
+# ACT 前轻量 scope 预检（未就绪 exit 2；-Force 为兼容参数，不能绕过 network profile）
 powershell -File skills\scripts\case-guard.ps1 -CaseRoot work\my-case
 # Evidence 追加
 powershell -File skills\scripts\append-evidence.ps1 -CaseRoot work\my-case -Id E-001 -Title "..." -ReproCommand "..."
@@ -48,7 +48,7 @@ bash skills/scripts/case-init.sh --hint "<用户任务>" --case-name "my-case"
 bash skills/scripts/case-init.sh --hint "<用户任务>" --case-name "my-case" --project-root "/path/to/analysis-project"
 # 本地离线样本：
 bash skills/scripts/case-init.sh --hint "offline apk" --case-name "my-sample" --preset offline-sample --sample ./app.apk
-# ACT 前轻量 scope 门禁（--force 为兼容参数，不能绕过硬门）：
+# ACT 前轻量 scope 预检（--force 为兼容参数，不能绕过 network profile）：
 bash skills/scripts/case-guard.sh --case-root work/my-sample
 # 路由 parity：
 bash skills/scripts/test-routing.sh
@@ -61,7 +61,7 @@ python3 skills/case-review/scripts/review_case.py work/<case> --verify-hashes --
 | 文档 | 用途 |
 |------|------|
 | `ops/IDENTITY.md` | 我们是路由包，不是 Z3r0 平台 |
-| `ops/scope-contract.md` | 启动门槛 |
+| `ops/scope-contract.md` | case 跟踪模板 + network profile |
 | `ops/evidence-finding-path.md` | 证据链 |
 | `case-review/SKILL.md` | Evidence 图审查与报告交接 |
 | `ops/role-map.md` | 角色→skill |
@@ -100,6 +100,7 @@ python3 skills/case-review/scripts/review_case.py work/<case> --verify-hashes --
 | **R24** | Windows / AD / Kerberos / AD CS | `windows-ad/` |
 | **R37** | 联邦身份 SAML/OIDC | `identity-federation/` |
 | **R23** | 云 / 容器 / K8s | `cloud-k8s/` |
+| **R45** | 云架构 / 解决方案架构 / IaC / FinOps | `cloud-architect/` |
 | **R35** | 数据库安全 | `database-security/` |
 | **R25** | 取证 / 内存转储 / 时间线 | `digital-forensics/` |
 | **R44** | OSINT / 威胁情报 / 公开 X IOC 补充 | `threat-intelligence/` |

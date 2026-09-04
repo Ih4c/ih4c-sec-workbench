@@ -317,3 +317,7 @@ See [Installation and Download Security Guidance](docs/UV-AND-DOWNLOAD-SECURITY.
 ## Community quick start and issue triage
 
 See [Quick Start](docs/QUICKSTART_zh.md) and [Community Issue Triage](docs/COMMUNITY-ISSUE-TRIAGE.md) for installation, client integration, and how community issues are classified. Installation/archive security details remain in [Installation and Download Security Guidance](docs/UV-AND-DOWNLOAD-SECURITY.md).
+
+---
+
+> **ih4c-sec-workbench** is a personal, heavily modified fork of the original [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) project.

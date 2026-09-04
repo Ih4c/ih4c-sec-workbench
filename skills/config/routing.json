@@ -180,7 +180,7 @@
       "label": "Cloud / K8s",
       "skill": "cloud-k8s/SKILL.md",
       "keywords": [
-        { "must": "kubernetes|\\bk8s\\b|container.?escape|docker.?escape|kube-?bench|cloud.?secur|imds|169\\.254\\.169\\.254|容器.?逃逸|云.?安全|k8s.?渗透|s3|对象存储|存储桶", "note": "S3/对象存储归云安全" }
+        { "must": "kubernetes|\\bk8s\\b|container.?escape|docker.?escape|kube-?bench|cloud.?secur|imds|169\\.254\\.169\\.254|容器.?逃逸|云.?安全|k8s.?渗透|s3|对象存储|存储桶|aws.?pentest|azure.?pentest|gcp.?pentest|cloud.?pentest|云.?渗透", "note": "S3/对象存储归云安全；pentest 限定的云词归云/K8s" }
       ]
     },
     "R24": {
@@ -218,6 +218,14 @@
       "keywords": [
         { "must": "\\bosint\\b|open.?source.?intelligence|threat.?intelligence|\\bcti\\b|ioc.?enrichment|indicator.?enrichment|威胁.?情报|开源.?情报|ioc.?扩充|ioc.?富化" },
         { "must": "twitter|tweet|x\\.com|x.?post|推文|社交.?媒体", "mustAll": ["ioc|threat|malware|campaign|actor|phish|scam|impersonat|indicator|情报|威胁|恶意|钓鱼|诈骗|仿冒"], "note": "要求安全上下文，避免把通用社交分析路由到威胁情报" }
+      ]
+    },
+    "R45": {
+      "label": "Cloud architecture / solutions architect",
+      "skill": "cloud-architect/SKILL.md",
+      "keywords": [
+        { "must": "solutions.?architect|cloud.?architect|well-?architected|landing.?zone|infrastructure.?as.?code|\\biac\\b|\\bterraform\\b|\\bbicep\\b|cloudformation|\\bpulumi\\b|aws.?cdk|finops|architecture.?review|架构.?设计|方案.?架构|架构师|多云.?架构", "note": "云设计/IaC/FinOps → cloud-architect；pentest 限定的云词留在 R23" },
+        { "must": "aws|azure|\\bgcp\\b|multi.?cloud|hybrid.?cloud|混合.?云", "mustAll": ["architect|architecture|design|terraform|bicep|iac|landing|dr.?plan|\\brto\\b|\\brpo\\b|架构"], "note": "厂商词 + 架构词 = 设计任务，不是攻击" }
       ]
     },
     "R28": {
@@ -324,7 +332,7 @@
   "priority": [
     "R4", "R1", "R2", "R3", "R30", "R31", "R33", "R5", "R9", "R21",
     "R22", "R6", "R7", "R8", "R34", "R28", "R17", "R16", "R18", "R24",
-    "R37", "R23", "R35", "R25", "R44", "R36", "R29", "R38", "R32", "R26", "R27",
+    "R37", "R23", "R45", "R35", "R25", "R44", "R36", "R29", "R38", "R32", "R26", "R27",
     "R10", "R11", "R12", "R13", "R14", "R15", "R19", "R40", "R20", "R39", "R41", "R0"
   ]
 }
