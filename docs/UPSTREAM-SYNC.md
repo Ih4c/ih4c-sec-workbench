@@ -50,6 +50,14 @@ bash skills/scripts/master-route.sh --hint "<sample task>"                      
 # 5. Commit on main and push
 ```
 
+## Route-ID divergence (important)
+
+Route IDs are fork-local and no longer aligned with upstream:
+
+- Upstream `R45` = `binary-ninja-reverse/`; **our `R45` = `cloud-architect/`, our `R46` = `binary-ninja-reverse/`.**
+- Any upstream change to `routing.json`, `MASTER-ROUTING.md`, or `routing-benchmark.json` that mentions `R45` MUST be remapped (R45 → R46) before taking.
+- Never accept upstream benchmark cases or route entries without checking the ID against our `skills/config/routing.json`.
+
 ## When to skip a sync entirely
 
 - Upstream change only touches files we rewrote, and the change doesn't fix a bug we also have.

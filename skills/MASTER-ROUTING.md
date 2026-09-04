@@ -89,6 +89,7 @@ python3 skills/case-review/scripts/review_case.py work/<case> --verify-hashes --
 | **R9** | malware samples / YARA / sandbox | `malware-analysis/` |
 | **R21** | protocols / Protobuf / PCAP protocol | `protocol-reverse/` |
 | **R22** | Ghidra / open source decompilation | `ghidra-reverse/` |
+| **R46** | Binary Ninja / binja / HLIL / MLIL | `binary-ninja-reverse/` |
 | **R6** | IDA / decompilation / deep disassembly | `ida-reverse/` |
 | **R7** | radare2 / r2 | `radare2/` |
 | **R8** | firmware / binwalk / IoT / EMBA | `firmware-pentest/` |

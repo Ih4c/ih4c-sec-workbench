@@ -11,6 +11,7 @@
 | [apk-reverse](apk-reverse/SKILL.md) | 在 CLI 环境下做 Android APK 逆向时使用 (use when reversing Android APK in a CLI environment)。适用于 APK 解包、Java 反编译、smali 修改、重打包、Frida 动态 Hook，以及按需切换到 so/native 分析 (APK u... |
 | [attack-chain](attack-chain/SKILL.md) | Use for authorized multi-stage attack-path planning and orchestration when a task spans reconnaissance, initial access, privilege escalation, lateral movemen... |
 | [binary-diff](binary-diff/SKILL.md) | Cross-version symbol migration and binary diffing (跨版本符号迁移与二进制差分). Use when you have symbols/reversing results for an old version and need to migrate them qu... |
+| [binary-ninja-reverse](binary-ninja-reverse/SKILL.md) | Use for authorized binary analysis in Binary Ninja, including HLIL/MLIL/LLIL inspection, strings/imports/exports, cross-references, types, patch review, Pyth... |
 | [browser-automation](browser-automation/SKILL.md) | Unified automation entry point (统一自动化入口). Covers browser automation (Playwright) and Windows desktop app automation (OpenReverse). |
 | [browser-extension-reverse](browser-extension-reverse/SKILL.md) | Use for authorized reverse engineering of browser extensions (Chrome/Firefox) including manifest analysis, background workers, and extension-based credential... |
 | [case-review](case-review/SKILL.md) | Reviews a reverse-skill case package for scope readiness, Evidence to Finding to Path traceability, work item coverage, timeline references, and optional art... |
@@ -60,6 +61,7 @@ skills/api-security/SKILL.md/
 skills/apk-reverse/SKILL.md/
 skills/attack-chain/SKILL.md/
 skills/binary-diff/SKILL.md/
+skills/binary-ninja-reverse/SKILL.md/
 skills/browser-automation/SKILL.md/
 skills/browser-extension-reverse/SKILL.md/
 skills/case-review/SKILL.md/
